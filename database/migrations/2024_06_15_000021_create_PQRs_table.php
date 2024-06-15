@@ -12,11 +12,11 @@ return new class extends Migration
      * Schema table name to migrate
      * @var string
      */
-    public $tableName = 'PQRs';
+    public $tableName = 'pqrs';
 
     /**
      * Run the migrations.
-     * @table PQRs
+     * @table pqrs
      *
      * @return void
      */
@@ -32,23 +32,23 @@ return new class extends Migration
             $table->string('responsible_type')->nullable();
             $table->integer('responsible_id')->nullable();
             $table->text('answer')->nullable();
-            $table->integer('PQR_types_id');
-            $table->integer('PQR_status_id');
+            $table->integer('pqr_types_id');
+            $table->integer('pqr_status_id');
 
-            $table->index(["PQR_types_id"], 'fk_PQRs_PQR_types1_idx');
+            $table->index(["pqr_types_id"], 'fk_pqrs_pqr_types1_idx');
 
-            $table->index(["PQR_status_id"], 'fk_PQRs_PQR_statusses1_idx');
+            $table->index(["pqr_status_id"], 'fk_pqrs_pqr_statusses1_idx');
             $table->softDeletes();
             $table->nullableTimestamps();
 
 
-            $table->foreign('PQR_types_id', 'fk_PQRs_PQR_types1_idx')
-                ->references('id')->on('PQR_types')
+            $table->foreign('pqr_types_id', 'fk_pqrs_pqr_types1_idx')
+                ->references('id')->on('pqr_types')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
 
-            $table->foreign('PQR_status_id', 'fk_PQRs_PQR_statusses1_idx')
-                ->references('id')->on('PQR_statusses')
+            $table->foreign('pqr_status_id', 'fk_pqrs_pqr_statusses1_idx')
+                ->references('id')->on('pqr_statusses')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
         });

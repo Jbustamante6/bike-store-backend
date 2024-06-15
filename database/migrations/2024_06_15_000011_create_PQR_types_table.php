@@ -12,7 +12,7 @@ return new class extends Migration
      * Schema table name to migrate
      * @var string
      */
-    public $tableName = 'PQR_types';
+    public $tableName = 'pqr_types';
 
     /**
      * Run the migrations.
