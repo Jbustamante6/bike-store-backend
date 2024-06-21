@@ -100,4 +100,21 @@ class User extends Authenticatable implements Auditable
     {
         return $this->belongsTo('App\Models\DocumentType');
     }
+
+    /**
+    * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+    */
+    public function pqrs_requested()
+    {
+        return $this->morphMany('App\Models\HowItWorks', 'claimant');
+    }
+
+    /**
+    * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+    */
+    public function pqrs_assigned()
+    {
+        return $this->morphMany('App\Models\HowItWorks', 'responsible');
+    }
+
 }

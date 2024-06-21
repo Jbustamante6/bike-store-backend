@@ -54,4 +54,12 @@ class PQR extends Model implements Auditable
     {
         return $this->belongsTo('App\Models\PQRType', 'pqr_types_id');
     }
+
+    /**
+     * Get the owning section pqrs model.
+     */
+    public function pqrs()
+    {
+        return $this->morphTo();
+    }
 }
