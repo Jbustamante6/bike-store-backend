@@ -3,6 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Dyrynda\Database\Support\CascadeSoftDeletes;
+use OwenIt\Auditing\Contracts\Auditable;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @property integer $id
@@ -18,14 +21,16 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $created_at
  * @property string $updated_at
  * @property Product[] $products
- * @property BookStatuss $bookStatuss
+ * @property BookStatus $bookStatus
  * @property PaymentMethod $paymentMethod
  * @property User $user
  * @property User $user
  * @property Service[] $services
  */
-class Book extends Model
+class Book extends Model implements Auditable
 {
+    use SoftDeletes, CascadeSoftDeletes;
+    use \OwenIt\Auditing\Auditable;
     /**
      * @var array
      */
@@ -42,9 +47,9 @@ class Book extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function bookStatuss()
+    public function bookStatus()
     {
-        return $this->belongsTo('App\Models\BookStatuss', 'book_status_id');
+        return $this->belongsTo('App\Models\BookStatus', 'book_status_id');
     }
 
     /**
@@ -58,7 +63,7 @@ class Book extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function user()
+    public function purchaser()
     {
         return $this->belongsTo('App\Models\User', 'purchaser_id');
     }
@@ -66,7 +71,7 @@ class Book extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function user()
+    public function seller()
     {
         return $this->belongsTo('App\Models\User', 'seller_id');
     }

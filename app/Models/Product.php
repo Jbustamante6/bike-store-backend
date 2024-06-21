@@ -3,7 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
+use Dyrynda\Database\Support\CascadeSoftDeletes;
+use OwenIt\Auditing\Contracts\Auditable;
+use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * @property integer $id
  * @property integer $product_type_id
@@ -18,7 +20,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $updated_at
  * @property Book[] $books
  * @property Purchase[] $purchases
- * @property ProductStatuss $productStatuss
+ * @property ProductStatus $productStatus
  * @property ProductType $productType
  */
 class Product extends Model
@@ -47,9 +49,9 @@ class Product extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function productStatuss()
+    public function productStatus()
     {
-        return $this->belongsTo('App\Models\ProductStatuss', 'product_status_id');
+        return $this->belongsTo('App\Models\ProductStatus', 'product_status_id');
     }
 
     /**

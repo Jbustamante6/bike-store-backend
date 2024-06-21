@@ -3,6 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Dyrynda\Database\Support\CascadeSoftDeletes;
+use OwenIt\Auditing\Contracts\Auditable;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @property integer $id
@@ -13,10 +16,12 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $created_at
  * @property string $updated_at
  * @property Purchase $purchase
- * @property RefundStatuss $refundStatuss
+ * @property RefundStatus $refundStatus
  */
-class Refund extends Model
+class Refund extends Model implements Auditable
 {
+    use SoftDeletes, CascadeSoftDeletes;
+    use \OwenIt\Auditing\Auditable;
     /**
      * @var array
      */
@@ -33,8 +38,8 @@ class Refund extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function refundStatuss()
+    public function refundStatus()
     {
-        return $this->belongsTo('App\Models\RefundStatuss', 'refund_status_id');
+        return $this->belongsTo('App\Models\RefundStatus', 'refund_status_id');
     }
 }

@@ -3,6 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Dyrynda\Database\Support\CascadeSoftDeletes;
+use OwenIt\Auditing\Contracts\Auditable;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @property integer $id
@@ -14,8 +17,10 @@ use Illuminate\Database\Eloquent\Model;
  * @property Address[] $addresses
  * @property State $state
  */
-class City extends Model
+class City extends Model implements Auditable
 {
+    use SoftDeletes, CascadeSoftDeletes;
+    use \OwenIt\Auditing\Auditable;
     /**
      * @var array
      */

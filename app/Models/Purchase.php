@@ -3,7 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
+use Dyrynda\Database\Support\CascadeSoftDeletes;
+use OwenIt\Auditing\Contracts\Auditable;
+use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * @property integer $id
  * @property integer $purchaser_id
@@ -21,8 +23,10 @@ use Illuminate\Database\Eloquent\Model;
  * @property User $user
  * @property Shipping[] $shippings
  */
-class Purchase extends Model
+class Purchase extends Model implements Auditable
 {
+    use SoftDeletes, CascadeSoftDeletes;
+    use \OwenIt\Auditing\Auditable;
     /**
      * @var array
      */
@@ -55,7 +59,7 @@ class Purchase extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function user()
+    public function purchaser()
     {
         return $this->belongsTo('App\Models\User', 'purchaser_id');
     }
@@ -63,7 +67,7 @@ class Purchase extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function user()
+    public function seller()
     {
         return $this->belongsTo('App\Models\User', 'seller_id');
     }

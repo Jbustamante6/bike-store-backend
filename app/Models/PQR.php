@@ -3,7 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
+use Dyrynda\Database\Support\CascadeSoftDeletes;
+use OwenIt\Auditing\Contracts\Auditable;
+use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * @property integer $id
  * @property integer $pqr_types_id
@@ -18,11 +20,13 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $deleted_at
  * @property string $created_at
  * @property string $updated_at
- * @property PqrStatuss $pqrStatuss
- * @property PqrType $pqrType
+ * @property PQRStatus $pqrStatus
+ * @property PQRType $pqrType
  */
-class PQR extends Model
+class PQR extends Model implements Auditable
 {
+    use SoftDeletes, CascadeSoftDeletes;
+    use \OwenIt\Auditing\Auditable;
     /**
      * The table associated with the model.
      * 
@@ -38,9 +42,9 @@ class PQR extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function pqrStatuss()
+    public function pqrStatus()
     {
-        return $this->belongsTo('App\Models\PqrStatuss', 'pqr_status_id');
+        return $this->belongsTo('App\Models\PQRStatus', 'pqr_status_id');
     }
 
     /**
@@ -48,6 +52,6 @@ class PQR extends Model
      */
     public function pqrType()
     {
-        return $this->belongsTo('App\Models\PqrType', 'pqr_types_id');
+        return $this->belongsTo('App\Models\PQRType', 'pqr_types_id');
     }
 }

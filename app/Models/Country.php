@@ -3,6 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Dyrynda\Database\Support\CascadeSoftDeletes;
+use OwenIt\Auditing\Contracts\Auditable;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @property integer $id
@@ -10,17 +13,18 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $deleted_at
  * @property string $created_at
  * @property string $updated_at
- * @property Book[] $books
- * @property Purchase[] $purchases
+ * @property State[] $states
  */
-class PaymentMehtod extends Model
+class Country extends Model implements Auditable
 {
+    use SoftDeletes, CascadeSoftDeletes;
+    use \OwenIt\Auditing\Auditable;
     /**
      * The table associated with the model.
      * 
      * @var string
      */
-    protected $table = 'payment_methods';
+    protected $table = 'countries';
 
     /**
      * @var array
@@ -30,16 +34,8 @@ class PaymentMehtod extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function books()
+    public function states()
     {
-        return $this->hasMany('App\Models\Book');
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function purchases()
-    {
-        return $this->hasMany('App\Models\Purchase');
+        return $this->hasMany('App\Models\State');
     }
 }

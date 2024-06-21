@@ -13,12 +13,20 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string $deleted_at
  * @property string $created_at
  * @property string $updated_at
- * @property Service[] $services
+ * @property Book[] $books
+ * @property Purchase[] $purchases
  */
-class ServiceType extends Model implements Auditable
+class PaymentMethod extends Model implements Auditable
 {
     use SoftDeletes, CascadeSoftDeletes;
     use \OwenIt\Auditing\Auditable;
+    /**
+     * The table associated with the model.
+     * 
+     * @var string
+     */
+    protected $table = 'payment_methods';
+
     /**
      * @var array
      */
@@ -27,8 +35,16 @@ class ServiceType extends Model implements Auditable
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function services()
+    public function books()
     {
-        return $this->hasMany('App\Models\Service');
+        return $this->hasMany('App\Models\Book');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function purchases()
+    {
+        return $this->hasMany('App\Models\Purchase');
     }
 }

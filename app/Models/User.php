@@ -5,7 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
+use Dyrynda\Database\Support\CascadeSoftDeletes;
+use OwenIt\Auditing\Contracts\Auditable;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\Permission\Traits\HasRoles;
 use Laravel\Sanctum\HasApiTokens;
 
 
@@ -28,9 +31,12 @@ use Laravel\Sanctum\HasApiTokens;
  * @property Purchase[] $purchases
  * @property DocumentType $documentType
  */
-class User extends Authenticatable
+class User extends Authenticatable implements Auditable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory;
+    use SoftDeletes, CascadeSoftDeletes;
+    use HasRoles;
+    use \OwenIt\Auditing\Auditable;
     /**
      * The table associated with the model.
      *
@@ -58,7 +64,7 @@ class User extends Authenticatable
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function books()
+    public function booksBuyed()
     {
         return $this->hasMany('App\Models\Book', 'purchaser_id');
     }
@@ -66,7 +72,7 @@ class User extends Authenticatable
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function books()
+    public function booksSold()
     {
         return $this->hasMany('App\Models\Book', 'seller_id');
     }
@@ -74,7 +80,7 @@ class User extends Authenticatable
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function purchases()
+    public function purchasesBuyed()
     {
         return $this->hasMany('App\Models\Purchase', 'purchaser_id');
     }
@@ -82,7 +88,7 @@ class User extends Authenticatable
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function purchases()
+    public function purchasesSold()
     {
         return $this->hasMany('App\Models\Purchase', 'seller_id');
     }
