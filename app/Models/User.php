@@ -25,10 +25,10 @@ use Laravel\Sanctum\HasApiTokens;
  * @property string $created_at
  * @property string $updated_at
  * @property Address[] $addresses
- * @property Book[] $books
- * @property Book[] $books
- * @property Purchase[] $purchases
- * @property Purchase[] $purchases
+ * @property Book[] booksBought
+ * @property Book[] booksSold
+ * @property Purchase[] purchasesBought
+ * @property Purchase[] purchasesSold
  * @property DocumentType $documentType
  */
 class User extends Authenticatable implements Auditable
@@ -64,7 +64,7 @@ class User extends Authenticatable implements Auditable
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function booksBuyed()
+    public function booksBought()
     {
         return $this->hasMany('App\Models\Book', 'purchaser_id');
     }
@@ -80,7 +80,7 @@ class User extends Authenticatable implements Auditable
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function purchasesBuyed()
+    public function purchasesBought()
     {
         return $this->hasMany('App\Models\Purchase', 'purchaser_id');
     }
