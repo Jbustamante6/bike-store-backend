@@ -197,6 +197,8 @@ return [
         OwenIt\Auditing\AuditingServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,
         Krlove\EloquentModelGenerator\Provider\GeneratorServiceProvider::class,
+        Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
+        App\Providers\ResponseMessagesServiceProvider::class,
 
     ],
 
@@ -213,6 +215,7 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
+        'ResponseHelper' => App\Helpers\ResponseHelper::class,
     ])->toArray(),
 
 ];

@@ -10,7 +10,7 @@ use OwenIt\Auditing\Contracts\Auditable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Permission\Traits\HasRoles;
 use Laravel\Sanctum\HasApiTokens;
-
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
 /**
  * @property integer $id
@@ -31,7 +31,7 @@ use Laravel\Sanctum\HasApiTokens;
  * @property Purchase[] purchasesSold
  * @property DocumentType $documentType
  */
-class User extends Authenticatable implements Auditable
+class User extends Authenticatable implements JWTSubject, Auditable
 {
     use HasApiTokens, HasFactory;
     use SoftDeletes, CascadeSoftDeletes;
@@ -115,6 +115,26 @@ class User extends Authenticatable implements Auditable
     public function pqrs_assigned()
     {
         return $this->morphMany('App\Models\HowItWorks', 'responsible');
+    }
+
+    /**
+     * Get the identifier that will be stored in the subject claim of the JWT.
+     *
+     * @return mixed
+     */
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    /**
+     * Return a key value array, containing any custom claims to be added to the JWT.
+     *
+     * @return array
+     */
+    public function getJWTCustomClaims()
+    {
+        return [];
     }
 
 }
