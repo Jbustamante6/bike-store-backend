@@ -1,3 +1,23 @@
+# Bicycle Products Sale and Rental Application
+
+## Description
+
+This application is developed in Laravel with the aim of managing the sale and rental of bicycle-related products. It offers functionalities to list, sell, and rent bicycles, as well as other associated products and services.
+
+## Features
+
+- **Product Management**: Allows adding, editing, and deleting bicycle-related products, including different types of bicycles and accessories.
+- **Rental Management**: System to manage bicycle rentals, tracking availability and recording rentals.
+- **Sales Management**: Functionality to process product sales, with payment options and order tracking.
+- **Product and Service Types**: Categorizes products into specific types, such as mountain bikes, road bikes, accessories, and maintenance services.
+- **Authentication and Authorization**: Authentication system for customers and administrators, with differentiated roles and permissions.
+
+## Technologies Used
+
+- **Laravel**: PHP framework for the backend.
+- **PostgreSQL**: Relational database to store information about products, users, sales, and rentals.
+
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
