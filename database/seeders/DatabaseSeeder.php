@@ -12,6 +12,30 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+
+        $this->call(DocumentTypesTableSeeder::class);
+        $this->call(BookStatusesTableSeeder::class);
+        $this->call(RefundStatusesTableSeeder::class);
+        $this->call(ProductStatusesTableSeeder::class);
+        $this->call(CountriesTableSeeder::class);
+        $this->call(StatesTableSeeder::class);
+        $this->call(CitiesTableSeeder::class);
+        $this->call(PaymentMethodsTableSeeder::class);
+        $this->call(ServiceTypesTableSeeder::class);
+        $this->call(ProductTypesTableSeeder::class);
+        $this->call(ShippingCompaniesTableSeeder::class);
+        $this->call(PqrStatusesTableSeeder::class);
+        $this->call(PqrTypesTableSeeder::class);
+        //$this->call(RolesTableSeeder::class);
+        //$this->call(PermissionsTableSeeder::class);
+        $this->call(UsersTableSeeder::class);
+        $this->call(AddressesTableSeeder::class);
+        $this->call(BooksTableSeeder::class);
+        $this->call(ProductsTableSeeder::class); // Asegúrate de incluir este seeder
+        $this->call(ServicesTableSeeder::class);
+        $this->call(PurchasesTableSeeder::class);
+        $this->call(BooksHasProductsTableSeeder::class);
+        $this->call(PurchasesHasProductsTableSeeder::class);
         // \App\Models\User::factory(10)->create();
 
         // \App\Models\User::factory()->create([

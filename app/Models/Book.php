@@ -23,8 +23,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property Product[] $products
  * @property BookStatus $bookStatus
  * @property PaymentMethod $paymentMethod
- * @property User $user
- * @property User $user
+ * @property User $purchaser
+ * @property User $seller
  * @property Service[] $services
  */
 class Book extends Model implements Auditable

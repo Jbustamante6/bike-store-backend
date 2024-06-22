@@ -19,8 +19,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property Refund[] $refunds
  * @property Product[] $products
  * @property PaymentMethod $paymentMethod
- * @property User $user
- * @property User $user
+ * @property User $purchaser
+ * @property User $seller
  * @property Shipping[] $shippings
  */
 class Purchase extends Model implements Auditable

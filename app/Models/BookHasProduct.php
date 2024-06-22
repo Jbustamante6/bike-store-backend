@@ -14,7 +14,7 @@ class BookHasProduct extends Model
 {
     /**
      * The table associated with the model.
-     * 
+     *
      * @var string
      */
     protected $table = 'books_has_products';
