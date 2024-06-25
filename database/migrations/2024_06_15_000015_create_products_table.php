@@ -29,7 +29,6 @@ return new class extends Migration
             $table->string('sku', 150);
             $table->integer('existences');
             $table->json('properties');
-            $table->tinyInteger('to_sell');
             $table->integer('product_type_id');
             $table->integer('product_status_id')->nullable();
 
