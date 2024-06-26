@@ -33,7 +33,7 @@ Route::group(['middleware' => ['jwt.verify']], function () {
         function () {
             Route::post('logout', [AuthController::class, 'logout']);
             Route::post('me', [AuthController::class, 'me']);
-            Route::post('update_me', [AuthController::class, 'updateMe']);
+            Route::post('update-me', [AuthController::class, 'updateMe']);
         }
     );
 });

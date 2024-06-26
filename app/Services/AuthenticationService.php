@@ -41,14 +41,14 @@ class AuthenticationService implements AuthenticationInterface
 
     public function me()
     {
-        return auth()->user()->only('uuid', 'name', 'email', 'username');
+        return auth()->user()->only('id', 'first_name', 'last_name', 'email', 'username');
     }
 
-    public function updateMe(string $name, string $username, string $password = NULL)
+    public function updateMe(int $document_type_id, int $doc_number, string $first_name, string $last_name, string $username, string $password = NULL)
     {
         $user = auth()->user();
 
-        $user->name     = $name;
+        $user->first_name = $first_name;
         $user->username = $username;
 
         if (isset($password)){
@@ -56,7 +56,7 @@ class AuthenticationService implements AuthenticationInterface
         }
 
         $user->save();
-        return $user->only('uuid', 'name', 'email', 'username', 'status');
+        return $user->only('id', 'document_type_id', 'doc_number', 'first_name', 'last_name', 'username');
     }
 
     protected function respondWithToken($token)

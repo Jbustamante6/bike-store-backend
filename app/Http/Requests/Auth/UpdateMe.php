@@ -27,10 +27,13 @@ class UpdateMe extends FormRequest
     public function rules()
     {
         return [
-            'name'              => 'required',
-            'username'          => 'required',
-            'new_password'      => 'nullable',
-            'c_new_password'    => 'nullable|same:new_password'
+            'document_type_id' => 'required',
+            'doc_number' => 'required',
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'username' => 'required',
+            'new_password' => 'nullable',
+            'c_new_password' => 'required_with:new_password|same:new_password|nullable'
         ];
     }
 

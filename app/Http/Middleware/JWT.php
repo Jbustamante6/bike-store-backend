@@ -2,7 +2,9 @@
 
 namespace App\Http\Middleware;
 
+use Symfony\Component\HttpFoundation\Response;
 use App\Utils\Enums\HttpResponseEnum;
+use Illuminate\Http\Request;
 use Exception;
 use Closure;
 use JWTAuth;

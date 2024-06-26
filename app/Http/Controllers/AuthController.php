@@ -88,7 +88,7 @@ class AuthController extends Controller
     public function updateMe(UpdateMe $request)
     {
         try {
-            $user = $this->authService->updateMe($request['name'], $request['username'], $request['new_password']);
+            $user = $this->authService->updateMe($request['document_type_id'], $request['doc_number'], $request['first_name'], $request['last_name'], $request['username'], $request['new_password']);
             return \ResponseHelper::GetSuccesResponse($user, HttpResponseEnum::HTTP_OK);
         } catch (OutOfBoundsException $e) {
             return \ResponseHelper::GetErrorResponse(ResponseMessages::NOT_FOUND_ERROR_RESPONSE, $e, HttpResponseEnum::HTTP_NOT_FOUND);
