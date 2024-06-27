@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UsersController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -25,6 +26,8 @@ Route::group(['prefix' => 'auth'], function () {
     Route::post('login', [AuthController::class, 'login']);
     Route::post('refresh', [AuthController::class, 'refresh']);
 });
+
+Route::post('register', [UsersController::class, 'register']);
 
 
 Route::group(['middleware' => ['jwt.verify']], function () {

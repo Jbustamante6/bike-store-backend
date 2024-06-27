@@ -9,13 +9,12 @@ use App\Http\Requests\Auth\UpdateMe;
 use App\Utils\Constants\ResponseMessages;
 use App\Http\Requests\Auth\Auth;
 use App\Utils\Enums\HttpResponseEnum;
-use App\Http\Controllers\Controller;
 use OutOfBoundsException;
 use Exception;
 
 class AuthController extends Controller
 {
-    private $authService;
+    private AuthenticationService $authService;
 
     public function __construct(AuthenticationService $authService)
     {
