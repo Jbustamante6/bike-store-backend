@@ -41,15 +41,7 @@ Route::group(['middleware' => ['jwt.verify']], function () {
         }
     );
 
-    Route::group(
-        ['prefix' => 'products'],
-        function () {
-            Route::get('', [ProductController::class, 'index']);
-        });
+    Route::apiResource('/products',ProductController::class);;
 
-    Route::group(
-        ['prefix' => 'services  '],
-        function () {
-            Route::get('', [ServiceController::class, 'index']);
-        });
+    Route::apiResource('/services',ServiceController::class);
 });
