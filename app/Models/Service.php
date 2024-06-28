@@ -31,7 +31,7 @@ class Service extends Model implements Auditable
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function serviceType()
+    public function type()
     {
         return $this->belongsTo('App\Models\ServiceType');
     }

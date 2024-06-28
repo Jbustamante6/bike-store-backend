@@ -48,7 +48,7 @@ class Product extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function productStatus()
+    public function status()
     {
         return $this->belongsTo('App\Models\ProductStatus', 'product_status_id');
     }
@@ -56,7 +56,7 @@ class Product extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function productType()
+    public function type()
     {
         return $this->belongsTo('App\Models\ProductType');
     }

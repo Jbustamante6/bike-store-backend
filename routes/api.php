@@ -4,8 +4,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\UsersController;
+use App\Http\Controllers\{AuthController, UsersController, ProductController, ServiceController};
+
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -39,4 +40,16 @@ Route::group(['middleware' => ['jwt.verify']], function () {
             Route::post('update-me', [AuthController::class, 'updateMe']);
         }
     );
+
+    Route::group(
+        ['prefix' => 'products'],
+        function () {
+            Route::get('', [ProductController::class, 'index']);
+        });
+
+    Route::group(
+        ['prefix' => 'services  '],
+        function () {
+            Route::get('', [ServiceController::class, 'index']);
+        });
 });
