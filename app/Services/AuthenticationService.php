@@ -66,6 +66,7 @@ class AuthenticationService implements AuthenticationInterface
             'access_token'  => $token,
             'expires_in'    => Carbon::now()->addMinutes(auth()->factory()->getTTL())->format('Y-m-d'),
             'user'          => auth()->user()->only('first_name', 'last_name', 'email', 'username'),
+            'role'          => auth()->user()->roles()->pluck('name')
         ];
     }
 }

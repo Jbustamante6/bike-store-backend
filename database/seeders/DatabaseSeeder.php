@@ -26,16 +26,18 @@ class DatabaseSeeder extends Seeder
         $this->call(ShippingCompaniesTableSeeder::class);
         $this->call(PqrStatusesTableSeeder::class);
         $this->call(PqrTypesTableSeeder::class);
-        //$this->call(RolesTableSeeder::class);
-        //$this->call(PermissionsTableSeeder::class);
         $this->call(UsersTableSeeder::class);
         $this->call(AddressesTableSeeder::class);
         $this->call(BooksTableSeeder::class);
-        $this->call(ProductsTableSeeder::class); // Asegúrate de incluir este seeder
+        $this->call(ProductsTableSeeder::class);
         $this->call(ServicesTableSeeder::class);
         $this->call(PurchasesTableSeeder::class);
         $this->call(BooksHasProductsTableSeeder::class);
         $this->call(PurchasesHasProductsTableSeeder::class);
+        $this->call(RoleSeeder::class);
+        $this->call(UserRolesSeeder::class);
+
+
         // \App\Models\User::factory(10)->create();
 
         // \App\Models\User::factory()->create([

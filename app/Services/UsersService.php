@@ -27,8 +27,9 @@ class UsersService implements UsersInterface
             $user->last_name = $last_name;
             $user->email = $email;
             $user->username = $username;
-            $user->password = $password;
+            $user->password = Hash::make($password);
             $user->save();
+            $user->assignRole(4);
         }
         catch(\Illuminate\Database\QueryException $e)
         {
