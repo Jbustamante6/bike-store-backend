@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Dyrynda\Database\Support\CascadeSoftDeletes;
 use OwenIt\Auditing\Contracts\Auditable;
@@ -19,6 +20,7 @@ class ServiceType extends Model implements Auditable
 {
     use SoftDeletes, CascadeSoftDeletes;
     use \OwenIt\Auditing\Auditable;
+    use HasFactory;
     /**
      * @var array
      */
