@@ -41,7 +41,11 @@ Route::group(['middleware' => ['jwt.verify']], function () {
         }
     );
 
-    Route::apiResource('/products',ProductController::class);;
+    Route::apiResource('/products',ProductController::class)->except(['index', 'show']);
 
-    Route::apiResource('/services',ServiceController::class);
+    Route::apiResource('/services',ServiceController::class)->except(['index', 'show']);
 });
+Route::get('/services', [ServiceController::class, 'index']);
+Route::get('/services/{service}', [ServiceController::class, 'show']);
+Route::get('/products', [ProductController::class, 'index']);
+Route::get('/products/{product}', [ProductController::class, 'show']);
