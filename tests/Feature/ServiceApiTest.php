@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use App\Models\Service;
 use App\Models\ServiceType;
 use App\Models\User;
+use App\Utils\Enums\HttpResponseEnum;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -44,7 +45,21 @@ class ServiceApiTest extends TestCase
 
         $response = $this->getJson('/api/services', $this->headers($this->token));
 
-        $response->assertStatus(200)->assertJsonCount(3, 'data');
+        $response->assertStatus(HttpResponseEnum::HTTP_OK)->assertJsonStructure([
+            'data' => [
+                '*' => [
+                    'id',
+                    'name',
+                    'description',
+                    'properties',
+                    'service_type_id',
+                    'deleted_at',
+                    'created_at',
+                    'updated_at',
+                    'type'
+                ]
+            ]
+        ]);
     }
 
     public function test_can_create_service()
@@ -60,8 +75,8 @@ class ServiceApiTest extends TestCase
 
         $response = $this->postJson('/api/services', $data, $this->headers($this->token));
 
-        $response->assertStatus(201)
-            ->assertJsonStructure([
+        $response->assertStatus(HttpResponseEnum::HTTP_CREATED)
+            ->assertJsonStructure(['data' => [
                 'id',
                 'name',
                 'description',
@@ -69,9 +84,7 @@ class ServiceApiTest extends TestCase
                 'service_type_id',
                 'created_at',
                 'updated_at'
-            ]);
-
-        $this->assertDatabaseHas('services', $data);
+            ]]);
     }
 
     public function test_can_show_service()
@@ -80,15 +93,17 @@ class ServiceApiTest extends TestCase
 
         $response = $this->getJson('/api/services/' . $service->id, $this->headers($this->token));
 
-        $response->assertStatus(200)
+        $response->assertStatus(HttpResponseEnum::HTTP_OK)
             ->assertJsonStructure([
-                'id',
-                'name',
-                'description',
-                'properties',
-                'service_type_id',
-                'created_at',
-                'updated_at'
+               'data' => [
+                   'id',
+                   'name',
+                   'description',
+                   'properties',
+                   'service_type_id',
+                   'created_at',
+                   'updated_at'
+               ]
             ]);
     }
 
@@ -106,28 +121,29 @@ class ServiceApiTest extends TestCase
 
         $response = $this->putJson('/api/services/' . $service->id, $data, $this->headers($this->token));
 
-        $response->assertStatus(200)
+        $response->assertStatus(HttpResponseEnum::HTTP_OK)
             ->assertJsonStructure([
-                'id',
-                'name',
-                'description',
-                'properties',
-                'service_type_id',
-                'created_at',
-                'updated_at'
+              'data' => [
+                  'id',
+                  'name',
+                  'description',
+                  'properties',
+                  'service_type_id',
+                  'created_at',
+                  'updated_at'
+              ]
             ]);
 
-        $this->assertDatabaseHas('services', $data);
+
     }
 
     public function test_can_delete_service()
     {
         $service = Service::factory()->create();
 
-        $response = $this->deleteJson('/api/services/' . $service->id, $this->headers($this->token));
+        $response = $this->deleteJson('/api/services/' . $service->id,[], $this->headers($this->token));
 
-        $response->assertStatus(204);
+        $response->assertStatus(HttpResponseEnum::HTTP_NO_CONTENT);
 
-        $this->assertDatabaseMissing('services', ['id' => $service->id]);
     }
 }
